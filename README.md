@@ -14,9 +14,6 @@
 [**Website Source**](https://github.com/steinate/cortex.github.io) &nbsp;|&nbsp;
 [**Video**](#video)
 
-Jiaqi Peng\*, Xiqian Yu\*, Delin Feng\*, Yuqiang Yang, Wenzhe Cai, Jing Xiong, Ganlin Yang, Jinliang Zheng, Jiafei Cao, Xueyuan Wei, Jiangmiao Pang, Yuan Shen†, Tai Wang†
-
-Tsinghua University · Shanghai AI Laboratory · Peking University · USTC
 
 <img src="assets/teaser.png" width="100%" alt="Cortex overview">
 
@@ -27,14 +24,15 @@ Cortex is a bidirectionally aligned embodied agent framework for long-horizon ma
 
 ## Video
 
-<div align="center">
-<video src="assets/cortex-demo.mp4" width="92%" controls muted loop playsinline></video>
-<br>
-<a href="assets/cortex-demo.mp4"><b>Open demo video</b></a>
-<br>
-<sub><b>Cortex in action.</b> Closed-loop long-horizon manipulation with executable subtask routing, compact memory, and online progress verification.</sub>
-</div>
+<p align="center">
+  <video src="https://steinate.github.io/cortex.github.io/static/videos/cortex-demo.mp4" controls muted></video>
+</p>
 
+<p align="center">
+  <em><a href="https://steinate.github.io/cortex.github.io/static/videos/cortex-demo.mp4"><b>Cortex in action.</b></a> Closed-loop long-horizon manipulation with executable subtask routing, compact memory, and online progress verification.</em>
+  <br>
+  <a href="https://steinate.github.io/cortex.github.io/#video">Watch on project page</a> · <a href="assets/cortex-demo.mp4">Local video file</a>
+</p>
 
 ## At a Glance
 
@@ -119,10 +117,6 @@ The real-world experiments emphasize capabilities that are difficult to obtain f
 - Step-level and episode-level evaluation scripts
 - Checkpoints and data cards
 - Full documentation for pairing Cortex with a System-1 executor
-
-## Project Layout
-
-This preview repository currently contains only the project README and representative assets. The implementation repository will follow the paper components: System-2 training, System-2 inference, evaluation, model serving, and visualization.
 
 ## Citation
 
