@@ -1,0 +1,76 @@
+# Python bytecode and build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+downloads/
+eggs/
+.eggs/
+*.egg-info/
+*.egg
+pip-wheel-metadata/
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Tool caches
+.cache/
+.coverage
+.coverage.*
+.hypothesis/
+.mypy_cache/
+.nox/
+.pyre/
+.pytest_cache/
+.ruff_cache/
+.tox/
+htmlcov/
+.ipynb_checkpoints/
+
+# Editors and OS files
+.DS_Store
+.idea/
+.vscode/
+
+# Secrets
+.hf_token
+.wandb_api_key
+.*_token
+.*api_key
+
+# Local data, checkpoints, and run outputs
+cache/
+data/
+data_processed/
+datasets/
+checkpoints/
+ckpts/
+exp/
+results/
+slurm_logs*/
+logs/
+debug/
+debug_images/
+wandb/
+nohup.out
+*.log
+*.out
+
+# Generated media and arrays
+*.mp4
+*.jpg
+*.jpeg
+*.png
+!assets/
+!assets/*.jpg
+!assets/*.jpeg
+!assets/*.png
+*.npy

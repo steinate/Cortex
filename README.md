@@ -89,6 +89,63 @@ The paper evaluates Cortex from three complementary angles.
 | System-2 episode-level evaluation | Measures closed-loop semantic drift when the VLM consumes its own previous memory. |
 | Dual-system simulation and real-world evaluation | Measures whether System-2 guidance improves full long-horizon execution when paired with a VLA executor. |
 
+### Step-Level Evaluation
+
+Frame-level evaluation for subtask and memory prediction.
+
+```bash
+CHECKPOINT_DIR=/path/to/cortex-system2-checkpoint
+BASE_MODEL=/path/to/Qwen3-VL-8B-Instruct
+JUDGE_MODEL=/path/to/Qwen3.5-9B
+
+BASE_MODEL="${BASE_MODEL}" \
+JUDGE_MODEL="${JUDGE_MODEL}" \
+OUTPUT_ROOT=exp/cortex/eval/step \
+MAX_SAMPLES=3000 \
+USE_DETAILED_INSTRUCTION=False \
+USE_SUBTASK_LIST=True \
+sbatch scripts/run_scripts/step_level.sh "${CHECKPOINT_DIR}"
+```
+
+Outputs are saved to `exp/cortex/eval/step/<checkpoint_name>/`. Use `EVAL_TASK_TYPE` and `EVAL_DATASET_TAG` to run one slice, e.g. `EVAL_TASK_TYPE=spatial EVAL_DATASET_TAG=galaxea`.
+
+### Episode-Level Evaluation
+
+Closed-loop episode evaluation where the planner reads its own previous memory.
+
+```bash
+CHECKPOINT=/path/to/cortex-system2-checkpoint
+BASE_MODEL=/path/to/Qwen3-VL-8B-Instruct
+JUDGE_MODEL=/path/to/Qwen3.5-9B
+
+MODEL_NAME_OR_PATH="${CHECKPOINT}" \
+BASE_MODEL_NAME_OR_PATH="${BASE_MODEL}" \
+PROCESSOR_NAME_OR_PATH="${BASE_MODEL}" \
+JUDGE_MODEL_PATH="${JUDGE_MODEL}" \
+OUTPUT_ROOT=exp/cortex/eval/episode \
+DATASET_TAG=galaxea \
+NUM_EVAL_EPISODES_PER_TASK=10 \
+USE_DETAILED_INSTRUCTION=False \
+USE_SUBTASK_LIST=True \
+sbatch scripts/run_scripts/episode_level.sh Adjust_The_Air_Conditioner_Temperature_20250711_006
+```
+
+Outputs are saved to `exp/cortex/eval/episode/<dataset_tag>/<task_name>/<model_name>/`. Set `DATASET_TAG` to `galaxea`, `agibot`, or `behavior`.
+
+```bash
+# Optional: evaluate a pre-started WebSocket policy instead of a local checkpoint.
+POLICY_BACKEND=websocket \
+POLICY_HOST=127.0.0.1 \
+POLICY_PORT=10094 \
+sbatch scripts/run_scripts/step_level.sh gpt-5
+```
+
+### Visualization
+
+```bash
+bash scripts/run_scripts/run_subtask_visualization.sh
+```
+
 The System-2 evaluation is organized around spatial grounding, long-horizon logical consistency, and object counting accuracy. The full system is evaluated on long-horizon simulation suites and zero-shot real-world manipulation tasks.
 
 <div align="center">

@@ -1,0 +1,12 @@
+{
+  "exclude": [
+    "**/__pycache__",
+    ".git",
+    ".vscode",
+    "checkpoints",
+    "eval",
+    "results",
+    "*.egg-info"
+  ],
+  "typeCheckingMode": "off"
+}
