@@ -12,7 +12,7 @@
 [**Paper**](https://arxiv.org/abs/2607.05377) &nbsp;|&nbsp;
 [**GitHub**](https://github.com/steinate/Cortex) &nbsp;|&nbsp;
 [**Website Source**](https://github.com/steinate/cortex.github.io) &nbsp;|&nbsp;
-[**Video**](#video)
+[**Video**](#cortex-in-action)
 
 
 <img src="assets/teaser.png" width="100%" alt="Cortex overview">
@@ -22,16 +22,14 @@
 Cortex is a bidirectionally aligned embodied agent framework for long-horizon manipulation. The core idea is to let a high-level VLM act as a cognitive orchestrator that tracks progress, updates semantic memory, and emits executable subtasks, while a low-level VLA focuses on reactive physical execution.
 
 
-## Video
+## Cortex in Action
 
 <p align="center">
-  <video src="https://steinate.github.io/cortex.github.io/static/videos/cortex-demo.mp4" controls muted></video>
+  <video src="https://github.com/user-attachments/assets/06e8a5d3-8db6-410f-b9a1-5df608ef5bee" controls muted></video>
 </p>
 
 <p align="center">
-  <em><a href="https://steinate.github.io/cortex.github.io/static/videos/cortex-demo.mp4"><b>Cortex in action.</b></a> Closed-loop long-horizon manipulation with executable subtask routing, compact memory, and online progress verification.</em>
-  <br>
-  <a href="https://steinate.github.io/cortex.github.io/#video">Watch on project page</a> · <a href="assets/cortex-demo.mp4">Local video file</a>
+  <em><b>Cortex in action.</b> Closed-loop long-horizon manipulation with executable subtask routing, compact memory, and online progress verification.</em>
 </p>
 
 ## At a Glance
