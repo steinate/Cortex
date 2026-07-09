@@ -5,8 +5,8 @@ This repository keeps only the Cortex System-2 evaluation, optional WebSocket se
 ## Conda Environment
 
 ```bash
-conda create -n InternVLA python=3.10 gcc_linux-64 gxx_linux-64 -c conda-forge -y
-conda activate InternVLA
+conda create -n cortex python=3.10 gcc_linux-64 gxx_linux-64 -c conda-forge -y
+conda activate cortex
 ```
 
 ## Dependencies
@@ -17,12 +17,10 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-If the datasets are stored on Petrel/Ceph, install the Petrel SDK used in the cluster environment:
-
-```bash
-wget https://pkg.pjlab.org.cn/repository/aiStorage/pjlab-oss-sdk/v2.3.24/petrel-oss-sdk-2.3.24.tar.gz
-pip install petrel-oss-sdk-2.3.24.tar.gz
-```
+If your datasets are stored in an object store such as S3, Ceph, or Petrel,
+install the storage backend required by your environment and make sure
+`mmengine.fileio` can read the configured `data_path` and `annotation_path`
+URIs. For local files, no extra storage backend is required.
 
 Install FlashAttention 2 for local Qwen-VL inference:
 

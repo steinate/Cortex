@@ -65,7 +65,7 @@ Episode-level:
 | Cortex | 95.5 | 86.8 | 76.8 |
 
 <div align="center">
-<img src="assets/robotwin.png" width="45%" alt="RoboTwin performance">
+<img src="assets/robotwin.png" width="70%" alt="RoboTwin performance">
 <br>
 <sub><b>Simulation.</b> Cortex improves long-horizon task execution by providing explicit subtask routing and progress verification.</sub>
 </div>
