@@ -159,6 +159,13 @@ The real-world experiments emphasize capabilities that are difficult to obtain f
 <sub><b>Real-world deployment.</b> Zero-shot multi-stage chemistry task with fine-grained subtask prediction and memory tracking.</sub>
 </div>
 
+## TODO
+
+- [x] Release System-2 evaluation code.
+- [ ] Release System-1/2 evaluation code for LIBERO and RoboTwin.
+- [ ] Release the subtask dataset.
+- [ ] Release System-2 training code.
+
 ## Citation
 
 If you find this project useful, please cite:
