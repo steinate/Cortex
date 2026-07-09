@@ -761,8 +761,8 @@ def _resolve_single_checkpoint_dir(model_args: ModelArguments, infer_args: Infer
     checkpoint_dir = Path(str(ckpt_path)).expanduser()
     policy_backend = str(getattr(infer_args, "policy_backend", "local") or "local").strip().lower()
     if policy_backend == "local":
-        if not checkpoint_dir.exists() or not checkpoint_dir.is_dir():
-            raise FileNotFoundError(f"checkpoint path is invalid: {checkpoint_dir}")
+        if checkpoint_dir.exists() and not checkpoint_dir.is_dir():
+            raise FileNotFoundError(f"checkpoint path is not a directory: {checkpoint_dir}")
         return checkpoint_dir
 
     # Remote policy backends do not load local checkpoint weights; keep the user-supplied

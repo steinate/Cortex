@@ -1,8 +1,8 @@
 [
   {
     "dataset_name": "galaxea_subtask_val_spatial",
-    "annotation_path": "/path/to/vla_sys2_data/galaxea/merged_episodes_norm_lang_mem_val_spatial.jsonl",
-    "data_path": "s3://manip-dataset/public/real/galaxea/lerobot_opensource",
+    "annotation_path": "/path/to/merged_episodes_norm_lang_mem_val_spatial.jsonl",
+    "data_path": "/path/to/galaxea/lerobot_opensource",
     "video_keys": "observation.images.head_rgb,observation.images.left_wrist_rgb,observation.images.right_wrist_rgb",
     "sample_interleave": 9,
     "transition_tail_sec": 1.7,
@@ -15,8 +15,8 @@
   },
   {
     "dataset_name": "galaxea_subtask_val_counting",
-    "annotation_path": "/path/to/vla_sys2_data/galaxea/merged_episodes_norm_lang_mem_val_counting.jsonl",
-    "data_path": "s3://manip-dataset/public/real/galaxea/lerobot_opensource",
+    "annotation_path": "/path/to/merged_episodes_norm_lang_mem_val_counting.jsonl",
+    "data_path": "/path/to/galaxea/lerobot_opensource",
     "video_keys": "observation.images.head_rgb,observation.images.left_wrist_rgb,observation.images.right_wrist_rgb",
     "sample_interleave": 9,
     "transition_tail_sec": 1.7,
@@ -29,8 +29,8 @@
   },
   {
     "dataset_name": "galaxea_subtask_val_long",
-    "annotation_path": "/path/to/vla_sys2_data/galaxea/merged_episodes_norm_lang_mem_val_long.jsonl",
-    "data_path": "s3://manip-dataset/public/real/galaxea/lerobot_opensource",
+    "annotation_path": "/path/to/galaxea/merged_episodes_norm_lang_mem_val_long.jsonl",
+    "data_path": "/path/to/galaxea/lerobot_opensource",
     "video_keys": "observation.images.head_rgb,observation.images.left_wrist_rgb,observation.images.right_wrist_rgb",
     "sample_interleave": 9,
     "transition_tail_sec": 1.7,
@@ -43,8 +43,8 @@
   },
   {
     "dataset_name": "agibot_subtask_val_spatial",
-    "annotation_path": "/path/to/vla_sys2_data/agibot/merged_episodes_norm_lang_mem_val_spatial.jsonl",
-    "data_path": "s3://manip-dataset/public/real/agibotworld",
+    "annotation_path": "/path/to/agibot/merged_episodes_norm_lang_mem_val_spatial.jsonl",
+    "data_path": "/path/to/agibotworld",
     "video_keys": "observation.images.head,observation.images.hand_left,observation.images.hand_right",
     "sample_interleave": 12,
     "transition_tail_sec": 0.7,
@@ -57,8 +57,8 @@
   },
   {
     "dataset_name": "agibot_subtask_val_counting",
-    "annotation_path": "/path/to/vla_sys2_data/agibot/merged_episodes_norm_lang_mem_val_counting.jsonl",
-    "data_path": "s3://manip-dataset/public/real/agibotworld",
+    "annotation_path": "/path/to/agibot/merged_episodes_norm_lang_mem_val_counting.jsonl",
+    "data_path": "/path/to/agibotworld",
     "video_keys": "observation.images.head,observation.images.hand_left,observation.images.hand_right",
     "sample_interleave": 12,
     "transition_tail_sec": 0.7,
@@ -71,8 +71,8 @@
   },
   {
     "dataset_name": "agibot_subtask_val_long",
-    "annotation_path": "/path/to/vla_sys2_data/agibot/merged_episodes_norm_lang_mem_val_long.jsonl",
-    "data_path": "s3://manip-dataset/public/real/agibotworld",
+    "annotation_path": "/path/to/agibot/merged_episodes_norm_lang_mem_val_long.jsonl",
+    "data_path": "/path/to/agibotworld",
     "video_keys": "observation.images.head,observation.images.hand_left,observation.images.hand_right",
     "sample_interleave": 12,
     "transition_tail_sec": 0.7,
@@ -85,7 +85,7 @@
   },
   {
     "dataset_name": "behavior_subtask_val_spatial",
-    "annotation_path": "/path/to/vla_sys2_data/behaviro-1k/merged_episodes_norm_lang_mem_val_spatial.jsonl",
+    "annotation_path": "/path/to/behaviro-1k/merged_episodes_norm_lang_mem_val_spatial.jsonl",
     "data_path": "/path/to/behavior-1k/2025-challenge-demos/",
     "video_keys": "observation.images.rgb.head,observation.images.rgb.left_wrist,observation.images.rgb.right_wrist",
     "sample_interleave": 30,
@@ -99,7 +99,7 @@
   },
   {
     "dataset_name": "behavior_subtask_val_counting",
-    "annotation_path": "/path/to/vla_sys2_data/behaviro-1k/merged_episodes_norm_lang_mem_val_counting.jsonl",
+    "annotation_path": "/path/to/behaviro-1k/merged_episodes_norm_lang_mem_val_counting.jsonl",
     "data_path": "/path/to/behavior-1k/2025-challenge-demos/",
     "video_keys": "observation.images.rgb.head,observation.images.rgb.left_wrist,observation.images.rgb.right_wrist",
     "sample_interleave": 30,
@@ -113,7 +113,7 @@
   },
   {
     "dataset_name": "behavior_subtask_val_long",
-    "annotation_path": "/path/to/vla_sys2_data/behaviro-1k/merged_episodes_norm_lang_mem_val_long.jsonl",
+    "annotation_path": "/path/to/behaviro-1k/merged_episodes_norm_lang_mem_val_long.jsonl",
     "data_path": "/path/to/behavior-1k/2025-challenge-demos/",
     "video_keys": "observation.images.rgb.head,observation.images.rgb.left_wrist,observation.images.rgb.right_wrist",
     "sample_interleave": 30,

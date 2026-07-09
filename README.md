@@ -11,6 +11,7 @@
 [**Project Page**](https://steinate.github.io/cortex.github.io/) &nbsp;|&nbsp;
 [**Paper**](https://arxiv.org/abs/2607.05377) &nbsp;|&nbsp;
 [**GitHub**](https://github.com/steinate/Cortex) &nbsp;|&nbsp;
+[**Hugging Face**](https://huggingface.co/Steinate/Cortex) &nbsp;|&nbsp;
 [**Website Source**](https://github.com/steinate/cortex.github.io) &nbsp;|&nbsp;
 [**Video**](#cortex-in-action)
 
@@ -25,7 +26,7 @@ Cortex is a bidirectionally aligned embodied agent framework for long-horizon ma
 ## Cortex in Action
 
 <p align="center">
-  <video src="https://github.com/user-attachments/assets/06e8a5d3-8db6-410f-b9a1-5df608ef5bee" controls muted></video>
+  <video src="https://github.com/user-attachments/assets/8126cadc-b9ca-45f5-bdb8-e80527853faf" controls muted></video>
 </p>
 
 <p align="center">
@@ -89,17 +90,31 @@ The paper evaluates Cortex from three complementary angles.
 | System-2 episode-level evaluation | Measures closed-loop semantic drift when the VLM consumes its own previous memory. |
 | Dual-system simulation and real-world evaluation | Measures whether System-2 guidance improves full long-horizon execution when paired with a VLA executor. |
 
-### Step-Level Evaluation
-
-Frame-level evaluation for subtask and memory prediction.
+Follow the environment setup in [docs/installation.md](docs/installation.md) before running evaluation. The examples below use the released System-2 checkpoint hosted on [Hugging Face](https://huggingface.co/Steinate/Cortex) as `CHECKPOINT_DIR`:
 
 ```bash
-CHECKPOINT_DIR=/path/to/cortex-system2-checkpoint
-BASE_MODEL=/path/to/Qwen3-VL-8B-Instruct
-JUDGE_MODEL=/path/to/Qwen3.5-9B
+CHECKPOINT_DIR=Steinate/Cortex
+BASE_MODEL=Qwen/Qwen3-VL-8B-Instruct
+JUDGE_MODEL=/path/to/judge-vlm
+EVAL_DATASET_CONFIG=cortex/inference/config/sys2_subtask_val.json
+```
+
+`CHECKPOINT_DIR` can be either the Hugging Face repo id above or a local directory downloaded from the same repo. If the Hugging Face repo requires authentication in your environment, run `huggingface-cli login` first. `BASE_MODEL` should point to the exact base VLM used by the checkpoint, and `JUDGE_MODEL` should point to the judge model used for automatic scoring.
+
+
+### Step-Level Evaluation
+
+Frame-level evaluation measures subtask and memory prediction accuracy with ground-truth memory. The default command evaluates all supported datasets and all three task types: `spatial`, `counting`, and `long`.
+
+```bash
+CHECKPOINT_DIR=Steinate/Cortex
+BASE_MODEL=Qwen/Qwen3-VL-8B-Instruct
+JUDGE_MODEL=/path/to/judge-vlm
+EVAL_DATASET_CONFIG=cortex/inference/config/sys2_subtask_val.json
 
 BASE_MODEL="${BASE_MODEL}" \
 JUDGE_MODEL="${JUDGE_MODEL}" \
+EVAL_DATASET_CONFIG="${EVAL_DATASET_CONFIG}" \
 OUTPUT_ROOT=exp/cortex/eval/step \
 MAX_SAMPLES=3000 \
 USE_DETAILED_INSTRUCTION=False \
@@ -107,21 +122,36 @@ USE_SUBTASK_LIST=True \
 sbatch scripts/run_scripts/step_level.sh "${CHECKPOINT_DIR}"
 ```
 
-Outputs are saved to `exp/cortex/eval/step/<checkpoint_name>/`. Use `EVAL_TASK_TYPE` and `EVAL_DATASET_TAG` to run one slice, e.g. `EVAL_TASK_TYPE=spatial EVAL_DATASET_TAG=galaxea`.
+Outputs are saved to `exp/cortex/eval/step/<checkpoint_name>/<dataset_tag>_<task_type>/`. To reproduce one slice, set `EVAL_TASK_TYPE` and `EVAL_DATASET_TAG`:
+
+```bash
+EVAL_TASK_TYPE=spatial \
+EVAL_DATASET_TAG=galaxea \
+BASE_MODEL="${BASE_MODEL}" \
+JUDGE_MODEL="${JUDGE_MODEL}" \
+EVAL_DATASET_CONFIG="${EVAL_DATASET_CONFIG}" \
+OUTPUT_ROOT=exp/cortex/eval/step \
+MAX_SAMPLES=3000 \
+USE_DETAILED_INSTRUCTION=False \
+USE_SUBTASK_LIST=True \
+sbatch scripts/run_scripts/step_level.sh "${CHECKPOINT_DIR}"
+```
 
 ### Episode-Level Evaluation
 
-Closed-loop episode evaluation where the planner reads its own previous memory.
+Closed-loop episode evaluation measures semantic drift when the planner reads its own previous memory. Choose a `DATASET_TAG` and pass one task name from that dataset as the final script argument.
 
 ```bash
-CHECKPOINT=/path/to/cortex-system2-checkpoint
-BASE_MODEL=/path/to/Qwen3-VL-8B-Instruct
-JUDGE_MODEL=/path/to/Qwen3.5-9B
+CHECKPOINT_DIR=Steinate/Cortex
+BASE_MODEL=Qwen/Qwen3-VL-8B-Instruct
+JUDGE_MODEL=/path/to/judge-vlm
+EVAL_DATASET_CONFIG=cortex/inference/config/sys2_subtask_val.json
 
-MODEL_NAME_OR_PATH="${CHECKPOINT}" \
+MODEL_NAME_OR_PATH="${CHECKPOINT_DIR}" \
 BASE_MODEL_NAME_OR_PATH="${BASE_MODEL}" \
 PROCESSOR_NAME_OR_PATH="${BASE_MODEL}" \
 JUDGE_MODEL_PATH="${JUDGE_MODEL}" \
+EVAL_DATASET_CONFIG="${EVAL_DATASET_CONFIG}" \
 OUTPUT_ROOT=exp/cortex/eval/episode \
 DATASET_TAG=galaxea \
 NUM_EVAL_EPISODES_PER_TASK=10 \
@@ -130,7 +160,7 @@ USE_SUBTASK_LIST=True \
 sbatch scripts/run_scripts/episode_level.sh Adjust_The_Air_Conditioner_Temperature_20250711_006
 ```
 
-Outputs are saved to `exp/cortex/eval/episode/<dataset_tag>/<task_name>/<model_name>/`. Set `DATASET_TAG` to `galaxea`, `agibot`, or `behavior`.
+Outputs are saved to `exp/cortex/eval/episode/<dataset_tag>/<task_name>/<model_name>/`. Set `DATASET_TAG` to `galaxea`, `agibot`, or `behavior`; set `MAX_EPISODES=1` for a quick smoke test.
 
 ```bash
 # Optional: evaluate a pre-started WebSocket policy instead of a local checkpoint.

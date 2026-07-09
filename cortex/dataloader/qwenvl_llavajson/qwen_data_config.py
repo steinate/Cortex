@@ -31,8 +31,8 @@ def _subtask_config(
 
 data_dict = {
     "agibot_subtask_train": _subtask_config(
-        annotation_path="/path/to/vla_sys2_data/agibot/merged_episodes_norm_lang_mem_train.jsonl",
-        data_path="s3://manip-dataset/public/real/agibotworld",
+        annotation_path="/path/to/agibot/merged_episodes_norm_lang_mem_train.jsonl",
+        data_path="/path/to/real/agibotworld",
         video_keys="observation.images.head,observation.images.hand_left,observation.images.hand_right",
         sample_interleave=12,
         transition_tail_sec=0.7,
@@ -43,8 +43,8 @@ data_dict = {
         last_tail_sec=1.0,
     ),
     "agibot_subtask_val": _subtask_config(
-        annotation_path="/path/to/vla_sys2_data/agibot/merged_episodes_norm_lang_mem_val.jsonl",
-        data_path="s3://manip-dataset/public/real/agibotworld",
+        annotation_path="/path/to/agibot/merged_episodes_norm_lang_mem_val.jsonl",
+        data_path="/path/to/agibotworld",
         video_keys="observation.images.head,observation.images.hand_left,observation.images.hand_right",
         sample_interleave=12,
         transition_tail_sec=0.7,
@@ -55,8 +55,8 @@ data_dict = {
         last_tail_sec=1.0,
     ),
     "galaxea_subtask_train": _subtask_config(
-        annotation_path="/path/to/vla_sys2_data/galaxea/merged_episodes_norm_lang_mem_train.jsonl",
-        data_path="s3://manip-dataset/public/real/galaxea/lerobot_opensource",
+        annotation_path="/path/to/galaxea/merged_episodes_norm_lang_mem_train.jsonl",
+        data_path="/path/to/real/galaxea/lerobot_opensource",
         video_keys="observation.images.head_rgb,observation.images.left_wrist_rgb,observation.images.right_wrist_rgb",
         sample_interleave=9,
         transition_tail_sec=1.7,
@@ -67,8 +67,8 @@ data_dict = {
         last_tail_sec=1.5,
     ),
     "galaxea_subtask_val": _subtask_config(
-        annotation_path="/path/to/vla_sys2_data/galaxea/merged_episodes_norm_lang_mem_val.jsonl",
-        data_path="s3://manip-dataset/public/real/galaxea/lerobot_opensource",
+        annotation_path="/path/to/galaxea/merged_episodes_norm_lang_mem_val.jsonl",
+        data_path="/path/to/real/galaxea/lerobot_opensource",
         video_keys="observation.images.head_rgb,observation.images.left_wrist_rgb,observation.images.right_wrist_rgb",
         sample_interleave=9,
         transition_tail_sec=1.7,
@@ -79,7 +79,7 @@ data_dict = {
         last_tail_sec=1.5,
     ),
     "behavior_subtask_train": _subtask_config(
-        annotation_path="/path/to/vla_sys2_data/behaviro-1k/merged_episodes_norm_lang_mem_train.jsonl",
+        annotation_path="/path/to/behaviro-1k/merged_episodes_norm_lang_mem_train.jsonl",
         data_path="/path/to/behavior-1k/2025-challenge-demos/",
         video_keys="observation.images.rgb.head,observation.images.rgb.left_wrist,observation.images.rgb.right_wrist",
         sample_interleave=30,
@@ -91,7 +91,7 @@ data_dict = {
         last_tail_sec=1.5,
     ),
     "behavior_subtask_val": _subtask_config(
-        annotation_path="/path/to/vla_sys2_data/behaviro-1k/merged_episodes_norm_lang_mem_val.jsonl",
+        annotation_path="/path/to/behaviro-1k/merged_episodes_norm_lang_mem_val.jsonl",
         data_path="/path/to/behavior-1k/2025-challenge-demos/",
         video_keys="observation.images.rgb.head,observation.images.rgb.left_wrist,observation.images.rgb.right_wrist",
         sample_interleave=30,

@@ -48,10 +48,6 @@ if [ -z "${CHECKPOINT_DIR}" ]; then
   echo "Usage: sbatch $0 <checkpoint_dir_or_label>"
   exit 1
 fi
-if [ "${POLICY_BACKEND_EARLY}" = "local" ] && [ ! -d "${CHECKPOINT_DIR}" ]; then
-  echo "[ERROR] checkpoint dir not found: ${CHECKPOINT_DIR}"
-  exit 1
-fi
 
 ##################################################
 # dist setting (single node)
