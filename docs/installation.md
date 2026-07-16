@@ -41,7 +41,13 @@ python -c "import flash_attn; print(f'version: {flash_attn.__version__}')"
 ```bash
 python -m py_compile cortex/inference/step_level_eval.py
 python -m py_compile cortex/inference/episode_level_eval.py
+python -m py_compile cortex/annotation/vlm_annotation.py
+python -m py_compile cortex/annotation/annotator_server.py
+python -m py_compile cortex/annotation/dynamic_matching.py
 python -m py_compile visualize_subtask_sampling.py
+bash -n scripts/run_scripts/run_vlm_annotation.sh
+bash -n scripts/run_scripts/run_manual_annotation_server.sh
+bash -n scripts/run_scripts/run_dynamic_matching.sh
 bash -n scripts/run_scripts/step_level.sh
 bash -n scripts/run_scripts/episode_level.sh
 bash -n scripts/run_scripts/run_subtask_visualization.sh

@@ -2,6 +2,9 @@ transformers==4.57.0
 accelerate==1.5.2
 torchvision==0.21.0
 qwen-vl-utils
+openai
+pydantic>=2.7,<3
+opencv-python-headless
 transformers_stream_generator==0.0.4
 tiktoken
 einops

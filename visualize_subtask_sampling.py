@@ -51,9 +51,21 @@ except Exception:
 
 try:
     from petrel_client.client import Client
-    file_client = Client("~/petreloss.conf", enable_mc=False)
 except Exception:
-    file_client = None
+    Client = None
+
+
+def _build_file_client():
+    config_path = os.environ.get("PETREL_CONF")
+    if Client is None or not config_path:
+        return None
+    try:
+        return Client(os.path.expanduser(config_path), enable_mc=False)
+    except Exception:
+        return None
+
+
+file_client = _build_file_client()
 
 
 def is_remote_path(path: str) -> bool:

@@ -7,7 +7,8 @@
 [![Project Page](https://img.shields.io/badge/Project-Page-2f80ed)](https://steinate.github.io/cortex.github.io/)
 [![Paper](https://img.shields.io/badge/arXiv-2607.05377-b31b1b)](https://arxiv.org/abs/2607.05377)
 [![Code](https://img.shields.io/badge/GitHub-Cortex-181717?logo=github)](https://github.com/steinate/Cortex)
-[![Hugging Face](https://img.shields.io/badge/Hugging%20Face-Steinate%2FCortex-ffcc4d?logo=huggingface)](https://huggingface.co/Steinate/Cortex)
+[![Model](https://img.shields.io/badge/Hugging%20Face-Steinate%2FCortex-ffcc4d?logo=huggingface)](https://huggingface.co/Steinate/Cortex)
+[![Dataset](https://img.shields.io/badge/Hugging%20Face-Steinate%2FCortex-ffcc4d?logo=huggingface)](https://huggingface.co/datasets/Steinate/Cortex)
 [![Video](https://img.shields.io/badge/Demo-Video-8e44ad)](#cortex-in-action)
 
 <p align="center">
@@ -18,6 +19,14 @@
 
 **Cortex (aka InternVLA-M1.5)** is a bidirectionally aligned embodied agent framework for long-horizon manipulation. The core idea is to let a high-level VLM act as a cognitive orchestrator that tracks progress, updates semantic memory, and emits executable subtasks, while a low-level VLA focuses on reactive physical execution.
 
+## What Cortex Provides
+
+- **📚 4K+ Hours of Long-Horizon Subtask Data**
+  [Cortex dataset](https://huggingface.co/datasets/Steinate/Cortex/tree/main) annotations spanning multiple robot datasets and benchmarks, including RoboTwin and RMBench.
+- **🛠️ Automated Subtask Annotation**
+  Generate VLM labels, correct a small seed set in the browser, and propagate annotations with [the three-stage workflow](docs/annotation.md).
+- **🚀 Zero-Shot Long-Horizon Planning Agent**
+  Download the released [Cortex model](https://huggingface.co/Steinate/Cortex) for ready-to-run System-2 planning.
 
 ## Highlights
 
@@ -80,6 +89,13 @@ JUDGE_MODEL=/path/to/Qwen3.5-9B
 EVAL_DATASET_CONFIG=cortex/inference/config/sys2_subtask_val.json
 ```
 The System-2 evaluation is organized around spatial grounding, long-horizon logical consistency, and object counting accuracy. The full system is evaluated on long-horizon simulation suites and zero-shot real-world manipulation tasks.
+
+## Datasets
+
+Download raw datasets and the released Cortex JSONL annotations by following
+[docs/datasets.md](docs/datasets.md). The document lists all Hugging Face
+sources, gated-access requirements, expected local directories, and the data
+loader configuration keys.
 
 ### Step-Level Evaluation
 
@@ -149,6 +165,53 @@ bash scripts/run_scripts/run_subtask_visualization.sh
   <video src="https://github.com/user-attachments/assets/4bf6487a-44ec-4b30-98fa-26355ad55642" controls muted></video>
 </p>
 
+## Subtask Annotation
+
+Cortex provides a complete three-stage annotation workflow. It starts with an
+OpenAI-compatible VLM, lets an annotator correct a small set of episodes in the
+browser, then propagates those corrections to the remaining episodes using
+state, action, and three-view visual features.
+
+The repository includes the 10-episode
+[`dump_bin_bigbin` demo](assets/dump_bin_bigbin/README.md) for this workflow.
+
+```text
+VLM initial labels -> browser correction -> variable-template dynamic matching
+```
+
+Set credentials only in your shell, never in a script or committed file:
+
+```bash
+export OPENAI_API_KEY="your_api_key"
+export OPENAI_BASE_URL="https://your-openai-compatible-endpoint/v1"
+export OPENAI_MODEL="your_vision_model"
+```
+
+1. Generate seed labels. Pass the episode indices to annotate:
+
+```bash
+bash scripts/run_scripts/run_vlm_annotation.sh 0 1 2 3 4
+```
+
+2. Review and correct the seed labels at `http://127.0.0.1:8765`:
+
+```bash
+bash scripts/run_scripts/run_manual_annotation_server.sh
+```
+
+3. Propagate the manual labels to all remaining episodes. The example runner
+uses `observation.state`, `action`, and head/left-wrist/right-wrist videos:
+
+```bash
+conda activate InternVLA
+bash scripts/run_scripts/run_dynamic_matching.sh
+```
+
+The demo annotations are written to `annotations/dump_bin_bigbin/manual/`.
+Use `DRY_RUN=1` with the third script to inspect template selection before
+writing outputs. See [docs/annotation.md](docs/annotation.md) for custom
+datasets, endpoint settings, outputs, and troubleshooting.
+
 ## Real-world Long-horizon Deployment
 
 The real-world experiments emphasize capabilities that are difficult to obtain from monolithic end-to-end policies: preserving procedural order, verifying completion before switching, using memory to disambiguate similar visual stages, and adapting to local execution uncertainty.
@@ -162,8 +225,9 @@ The real-world experiments emphasize capabilities that are difficult to obtain f
 ## TODO
 
 - [x] Release System-2 evaluation code.
+- [x] Release the subtask annotation pipelines.
+- [x] Release the subtask dataset.
 - [ ] Release System-1/2 evaluation code for LIBERO and RoboTwin.
-- [ ] Release the subtask dataset.
 - [ ] Release System-2 training code.
 
 ## Citation
